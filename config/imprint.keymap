@@ -33,7 +33,7 @@
 &kp CAPS &none        &kp N4       &kp N5  &kp N6  &none             &none           &kp LEFT   &kp DOWN &kp RIGHT  &kp K_APP    &none
 &none    &kp N0       &kp N1       &kp N2  &kp N3  &none             &none           &none      &none    &none      &none        &none
 &none    &trans       &trans       &trans  &trans                                    &trans     &none    &none      &trans       &kp C_MUTE
-                                           &trans  &kp INS &trans    &trans   &trans   &trans
+                                           &trans  &trans  &trans    &trans   &kp INS  &trans
                                            &trans  &trans  &none     &trans   &none    &trans
             >;
         };
