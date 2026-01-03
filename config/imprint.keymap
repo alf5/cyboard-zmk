@@ -83,6 +83,24 @@
             #binding-cells = <0>;
             bindings = <&kp LEFT>, <&kp DOWN>;
         };
+
+        ht_home_dir: ht_home_dir {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HT_HOME_DIR";
+            bindings = <&home_dir>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+    };
+
+    macros {
+        home_dir: home_dir {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp TILDE &kp SLASH>;
+            label = "HOME_DIR";
+        };
     };
 
     keymap {
@@ -90,12 +108,12 @@
 
         default_layer {
             bindings = <
-&kp F1     &kp F2    &kp F3    &kp F4     &kp F5     &kp F6                       &kp F7      &kp F8        &kp F9     &kp F10   &kp F11   &kp F12
-&kp GRAVE  &kp N1    &kp N2    &kp N3     &kp N4     &kp N5                       &kp N6      &kp N7        &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp ESC    &kp Q     &kp W     &kp F      &kp P      &kp B                        &kp K       &kp L         &kp U      &kp Y     &kp SEMI  &kp EQUAL
-&kp TAB    &kp A     &kp R     &kp S      &kp T      &kp G                        &kp M       &kp N         &kp E      &kp I     &kp O     &kp SQT
-&kp PG_UP  &kp Z     &kp X     &kp C      &kp D      &kp V                        &kp J       &kp H         &kp COMMA  &kp DOT   &kp FSLH  &kp BSLH
-&kp PG_DN  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT                                           &kp RSHFT     &kp LCTRL  &kp LALT  &kp LGUI  &caps_word
+&kp F1     &kp F2    &kp F3    &kp F4     &kp F5     &kp F6                       &kp F7      &kp F8        &kp F9     &kp F10   &kp F11              &kp F12
+&kp GRAVE  &kp N1    &kp N2    &kp N3     &kp N4     &kp N5                       &kp N6      &kp N7        &kp N8     &kp N9    &kp N0               &kp MINUS
+&kp ESC    &kp Q     &kp W     &kp F      &kp P      &kp B                        &kp K       &kp L         &kp U      &kp Y     &kp SEMI             &kp EQUAL
+&kp TAB    &kp A     &kp R     &kp S      &kp T      &kp G                        &kp M       &kp N         &kp E      &kp I     &kp O                &kp SQT
+&kp PG_UP  &kp Z     &kp X     &kp C      &kp D      &kp V                        &kp J       &kp H         &kp COMMA  &kp DOT   &ht_home_dir 0 FSLH  &kp BSLH
+&kp PG_DN  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT                                           &kp RSHFT     &kp LCTRL  &kp LALT  &kp LGUI             &caps_word
                                           &kp SPACE  &kp BSPC       &lt 4 ESC     &mo 4       &kp DEL       &kp ENTER
                                           &mo 2      &mt LGUI HOME  &mrph_lbkt    &mrph_rbkt  &mt LGUI END  &mo 2
             >;
@@ -172,7 +190,7 @@
 
 &trackball_peripheral_listener {
     input-processors =
-        // activate layer 3 within 500ms of the trackball moving,,,,,,,,,
+        // activate layer 3 within 500ms of the trackball moving,,,,,,,,,,
         <&zip_temp_layer 3 500>;
 };
 
@@ -180,11 +198,11 @@
 
 &trackball_central_listener {
     input-processors =
-        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,
+        // multiply sensitivity by 1, divide by 3 (make it slower for scrolling),,,,,,,,,,,
         <&zip_xy_scaler 1 3>,
-        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,
+        // make this trackball output scrolling events by default instead of cursor movement,,,,,,,,,,,
         <&zip_xy_to_scroll_mapper>,
-        // invert horiz scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,
+        // invert horiz scrolling so that the view moves in the same direction as the top of the trackball.,,,,,,,,,,,
         <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,
         <&zip_scroll_scaler 1 12>;
 };
